@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MarkovMe</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    </head>
+
+    <style>
+        body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: white;
+        background-color: #00aced;
+        }
+        input#input {
+        background-color: #00aced;
+        color: black;
+        }
+        input#submit {
+        background-color: #00aced;
+        }
+    </style>
+
+    <body>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <div class="container">
+        <div class="col-sm-4">
+            <h1><a href="https://twitter.com/ifihadahandle">@IfIHadAHandle</a> Tweets For You</h1>
+        </div>
+        <div class="col-sm-10">
+            <form id="form">
+            Twitter Handle To Markovify: <input type="text" id="input" color="black" name="username">
+            <input id="submit" type="submit" value="Tweet!"><br>
+            </form>
+        </div>
+        <br>
+        <div class="col-sm-10" id="tweet_this">
+        </div>
+        <div class="col-sm-6">
+            <img height=350 src="http://www.pngall.com/wp-content/uploads/2016/07/Twitter-PNG-Picture.png">
+        </div>
+        </div>
+    <script type="text/javascript">
+
+    function populateUsername( results ) {
+        $("#tweet_this").empty()
+        $("#tweet_this").html( "NEW TWEET! " + results['tweet']);
+        };
+
+    $("#form").submit(function() {
+        var params = {'username': $('#input').val()}
+        $.post('/hello_json', params, function(results) {
+            populateUsername(results)
+        })
+        return false;
+    });
+
+    </script>
+    </body>
+</html>
